@@ -31,7 +31,7 @@ public class Viewer {
     
     Image bkg = null;
     String prefix = null;
-    final static boolean DEBUG = false;
+    final static boolean DEBUG = true;
     
     void populateDigital(Document document)
     {
@@ -141,7 +141,7 @@ public class Viewer {
         }
     }
     
-    static int calibrate = 0;
+    public static int calibrate = 0;
     
     public void physics()
     {
@@ -149,12 +149,12 @@ public class Viewer {
             return;
         Viewer.lock = true;
         
-        if (calibrate == 0) {
+        if (calibrate == 1) {
             ((Analog) buttons.get("lstick_x")).centerX = xA;
             ((Analog) buttons.get("lstick_x")).centerY = yA;
             ((Analog) buttons.get("cstick_x")).centerX = xC;
             ((Analog) buttons.get("cstick_x")).centerY = yC;
-            calibrate = 1;
+            calibrate = 2;
         }
         
         buttons.get("a").value = values[0];

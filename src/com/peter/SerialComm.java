@@ -61,7 +61,6 @@ public class SerialComm implements SerialPortEventListener {
         }
     }
     
-    static int calibrate = 0;
     @Override
     public synchronized void serialEvent(SerialPortEvent oEvent)
     {
@@ -126,12 +125,12 @@ public class SerialComm implements SerialPortEventListener {
                 Viewer.values[12] = lT;
                 Viewer.values[13] = rT;
                 
-                if (calibrate == 0) {
+                if (Viewer.calibrate == 0) {
                     Viewer.xC = xC;
                     Viewer.yC = yC;
                     Viewer.xA = xA;
                     Viewer.yA = yA;
-                    calibrate = 1;
+                    Viewer.calibrate = 1;
                 }
                 Viewer.lock = false;
                 
