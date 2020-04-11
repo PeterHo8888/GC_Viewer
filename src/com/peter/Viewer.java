@@ -5,7 +5,6 @@
 package com.peter;
 
 import java.awt.Graphics;
-import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map.Entry;
@@ -29,9 +28,9 @@ public class Viewer {
     static boolean lock = false;
     static int xC, yC, xA, yA; // calibration
     
-    Image bkg = null;
+    Img bkg = null;
     String prefix = null;
-    final static boolean DEBUG = true;
+    final static boolean DEBUG = false;
     
     void populateDigital(Document document)
     {
@@ -111,15 +110,15 @@ public class Viewer {
         }
     }
     
-    private void getSkin(String prefix)
+    private void getSkin(String p)
             throws ParserConfigurationException, SAXException, IOException
     {
-        this.prefix = prefix;
+        prefix = "/" + p;
         
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
         
-        Document document = builder.parse(new File(prefix + "skin.xml"));
+        Document document = builder.parse(getClass().getResourceAsStream(prefix + "skin.xml"));
         
         document.getDocumentElement().normalize();
         
@@ -130,7 +129,7 @@ public class Viewer {
                         .getAttribute("image");
         System.out.println(prefix + fBackground);
         
-        bkg = new Image(0, 0, prefix + fBackground);
+        bkg = new Img(0, 0, prefix + fBackground);
     }
     
     public void draw(Graphics g)
@@ -154,6 +153,18 @@ public class Viewer {
             ((Analog) buttons.get("lstick_x")).centerY = yA;
             ((Analog) buttons.get("cstick_x")).centerX = xC;
             ((Analog) buttons.get("cstick_x")).centerY = yC;
+            
+            ((Analog) buttons.get("lstick_x")).maxX= 226;
+            ((Analog) buttons.get("lstick_x")).minX = 24;
+            ((Analog) buttons.get("lstick_x")).maxY= 233;
+            ((Analog) buttons.get("lstick_x")).minY = 28;
+            
+            ((Analog) buttons.get("cstick_x")).maxX= 214;
+            ((Analog) buttons.get("cstick_x")).minX = 35;
+            ((Analog) buttons.get("cstick_x")).maxY= 218;
+            ((Analog) buttons.get("cstick_x")).minY = 38;
+            
+            
             calibrate = 2;
         }
         

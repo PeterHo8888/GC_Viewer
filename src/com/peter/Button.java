@@ -9,8 +9,8 @@ import java.awt.Graphics;
 public class Button {
     String name;
     String filename;
-    int x, y, width, height;
-    Image i;
+    final int x, y, width, height;
+    Img i;
     int value;
     
     public Button(String n, String f, int x, int y, int w, int h)
@@ -21,7 +21,7 @@ public class Button {
         this.y = y;
         width = w;
         height = h;
-        i = new Image(x, y, filename);
+        i = new Img(x, y, filename);
         value = 0;
     }
     
@@ -52,15 +52,14 @@ class Analog extends Button {
     int xrange, yrange;
     int val_x, val_y;
     int centerX, centerY;
-    int max, min;
+    int maxX, minX;
+    int maxY, minY;
     public Analog(String n, String f, int x, int y, int w, int h, int xr, int yr)
     {
         super(n, f, x, y, w, h);
         xrange = xr;
         yrange = yr;
         val_x = val_y = 128;
-        max = 247;
-        min = 10;
     }
     
     public void draw(Graphics g)
